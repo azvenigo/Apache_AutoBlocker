@@ -1,10 +1,27 @@
-<!DOCTYPE html>
-<html>
-<title>404 Not Found</title>
-<body>
 <?php 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// MIT License                                                                                                        //
+//                                                                                                                    //
+// Copyright 2019 Alex Zvenigorodsky                                                                                  //
+//                                                                                                                    //
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated       //
+// documentation files (the "Software"), to deal in the Software without restriction, including without limitation    //
+// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and   //
+// to permit persons to whom the Software is furnished to do so, subject to the following conditions:                 //
+//                                                                                                                    //
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions of   //
+// the Software.                                                                                                      //
+//                                                                                                                    //
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO   //
+// THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE     //
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,// 
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE     // 
+// SOFTWARE.                                                                                                          //
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Instructions                                                                                                       //
 //                                                                                                                    //
 // This file implements an auto-blocking functionality when a malicious script attempts to scan your Apache server    //
 // for weaknesses by trying one path after another and receiving 404 responses.                                       //
@@ -36,7 +53,7 @@ $kTrackerLogFilename = "auto_lock.log";                                         
                                                                                                                       //
  // kBlockListFileName is the ".htaccess" file apache uses to restrict access.                                        //
 // This script will add bad actor IP addresses to this file. This can be site wide or within specific subdirectories. //
-$kBlockListFileName = "c:/my_web_root/public_html/.htaccess";                                                         //
+$kBlockListFileName = "c:/my_webroot/public_html/.htaccess";                                                          //
                                                                                                                       //
 // kNumSecondsToTrack is how long history is kept in kTrackerLogFilename.                                             //
 // The longer this time period the slower an attacker would need to rate limit their attack.                          //
@@ -53,8 +70,9 @@ $kMaxHitsToBlockAddress = 5;                                                    
 $request_uri = $_SERVER['REQUEST_URI'];
 $remote_addr = $_SERVER['REMOTE_ADDR'];
 
-// Body of the request
-echo('<h1>Not Found!</h1><br><p>The requested URL '.$request_uri.' was not found on this server.</p><br>');
+// Return the 404 request document
+echo('<!DOCTYPE html><html><title>404 Not Found</title><body><h1>Not Found!</h1><br><p>The requested URL '.$request_uri);
+echo(' was not found on this server.</p><br></body></html>');
 
 
 // Record structure of 404 requests
@@ -186,7 +204,4 @@ if ($missingDocArray->CountInstancesOfAddress($remote_addr) > $kMaxHitsToBlockAd
 	AddIPToBlockList($kBlockListFileName, $remote_addr);
 }
 
- ?> 
-</body>
-</html>
-
+?> 
