@@ -1,5 +1,5 @@
 # Apache_AutoBlocker
- PHP script to automatically ban IPs that try to scan for vulnerabilities. 
+ A Single, self-contained PHP script to automatically ban IPs that try to scan for vulnerabilities. 
 
 # How does it work
  A common technique malicious actors try is running scripts to scan for vulnerabilities on your web site.
