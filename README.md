@@ -22,7 +22,8 @@ Notice how there are numerous requests for files that do not exist on the server
 # Usage
   * Install/Enable PHP on your Apache server
   * Add this file to your site.
-     * Configure the variables below to your site
+     * Configure the variables in the script for your site.
+     * There are four variables in the configuration section along with explanations of what they do.
   * Direct Apache to server this file as a 404 response
      * In "httpd.conf" add this line: ErrorDocument 404 "/example_path/apache_auto_blocker.php"
   * Restart Apache and test by hitting a non-existent file on your site enough times to trigger the ban
